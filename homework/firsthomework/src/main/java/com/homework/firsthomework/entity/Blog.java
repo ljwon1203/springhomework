@@ -1,5 +1,6 @@
 package com.homework.firsthomework.entity;
 
+import com.homework.firsthomework.dto.BlogRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,4 +19,10 @@ public class Blog extends Timestamped {
 
     @Column(nullable = false)
     private String contents;
+
+    public Blog(BlogRequestDto requestDto) {
+
+        this.username = requestDto.getUsername();
+        this.contents = requestDto.getContents();
+    }
 }
