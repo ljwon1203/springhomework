@@ -4,10 +4,7 @@ import com.homework.firsthomework.dto.BlogRequestDto;
 import com.homework.firsthomework.entity.Blog;
 import com.homework.firsthomework.service.BlogService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -33,5 +30,10 @@ public class BlogController {
     @GetMapping("/api/blogs")
     public List<Blog> getBlogs() {
         return blogService.getBlogs();
+    }
+
+    @PutMapping("/api/blogs/{id}")
+    public Long updateBlog(@PathVariable Long id, @RequestBody BlogRequestDto requestDto) {
+        return blogService.update(id, requestDto);
     }
 }
