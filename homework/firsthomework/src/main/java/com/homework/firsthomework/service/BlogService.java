@@ -33,5 +33,9 @@ public class BlogService {
         blog.update(requestDto);
         return blog.getId();
     }
-
+    @Transactional
+    public Long deleteBlog(Long id) {
+        blogRepository.deleteById(id);
+        return id;
+    }
 }

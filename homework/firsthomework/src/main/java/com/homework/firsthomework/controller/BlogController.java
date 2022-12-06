@@ -36,4 +36,9 @@ public class BlogController {
     public Long updateBlog(@PathVariable Long id, @RequestBody BlogRequestDto requestDto) {
         return blogService.update(id, requestDto);
     }
+
+    @DeleteMapping("/api/blogs/{id}")
+    public Long deleteBlog(@PathVariable Long id) {
+        return blogService.deleteBlog(id);
+    }
 }
