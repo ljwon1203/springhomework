@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BlogService {
@@ -18,5 +20,9 @@ public class BlogService {
         Blog blog = new Blog(requestDto);
         blogRepository.save(blog);
         return blog;
+    }
+    @Transactional(readOnly = true)
+    public List<Blog> getBlogs() {
+        return blogRepository.findAllByOrderByModifiedAtDesc();
     }
 }

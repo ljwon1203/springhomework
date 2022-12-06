@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timeline Service</title>
+  <title>Welcome to My blog</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
@@ -12,6 +12,29 @@
       // HTML 문서를 로드할 때마다 실행합니다.
       getMessages();
     })
+
+    // 메모를 불러와서 보여줍니다.
+    function getMessages() {
+      // 1. 기존 메모 내용을 지웁니다.
+      $('#cards-box').empty();
+
+      // 2. 메모 목록을 불러와서 HTML로 붙입니다.
+      $.ajax({
+        type: "GET",
+        url: "/api/blogs",
+        data: {},
+        success: function (response) {
+          for (let i = 0; i < response.length; i++) {
+            let message = response[i];
+            let id = message['id'];
+            let username = message['username'];
+            let contents = message['contents'];
+            let modifiedAt = message['modifiedAt'];
+            addHTML(id, username, contents, modifiedAt);
+          }
+        }
+      });
+    }
 
     // 메모 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
     function addHTML(id, username, contents, modifiedAt) {
